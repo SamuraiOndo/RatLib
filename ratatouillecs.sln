@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ratatouillecs", "ratatouillec#\ratatouillecs.csproj", "{78CDA51F-28F9-4596-911B-6B55FFF49B6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ratatouillecs", "ratatouillecs\ratatouillecs.csproj", "{78CDA51F-28F9-4596-911B-6B55FFF49B6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ratatouillelib", "ratatouillelib\ratatouillelib.csproj", "{03905554-C473-4C63-BA35-17704A6751EE}"
 EndProject
