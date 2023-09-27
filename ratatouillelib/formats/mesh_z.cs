@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Yarhl.IO;
 using ratatouillelib.common;
 
-namespace ratatouillelib
+namespace ratatouillelib.formats
 {
     public class Mesh_Z
     {
@@ -15,19 +15,19 @@ namespace ratatouillelib
         private int[][] triangles;
         public void mesh_Z() { }
         public float[][] getVerts() { return vertices; }
-        public int[][] getTriangles() {  return triangles; }
+        public int[][] getTriangles() { return triangles; }
         public Header getHeader() { return header; }
 
         public void setVerts(float[][] vertices) { this.vertices = vertices; }
-        public void setTriangles(int[][] triangles) {  this.triangles = triangles; }
-        public void setHeader(Header header) {  this.header = header; }
+        public void setTriangles(int[][] triangles) { this.triangles = triangles; }
+        public void setHeader(Header header) { this.header = header; }
         public void readMesh_Z(DataReader reader)
         {
-            this.header = new Header();
+            header = new Header();
             header.readHeader(reader);
 
         }
     }
 
-    
+
 }

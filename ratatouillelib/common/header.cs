@@ -24,5 +24,7 @@ namespace ratatouillelib.common
             this.linkData = reader.ReadBytes(Convert.ToInt32(linkSize));
         }
         public uint getNameCrc32() {  return this.nameCrc32; }
+        public uint getClassCrc32() { return this.classCrc32; }
+        public byte[] getLinkData() {  return this.linkData; }
     }
 }
