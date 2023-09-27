@@ -13,6 +13,7 @@ namespace ratatouillelib
         private Header header;
         private float[][] vertices;
         private int[][] triangles;
+
         public float[][] getVerts() { return vertices; }
         public int[][] getTriangles() {  return triangles; }
         public Header getHeader() { return header; }
