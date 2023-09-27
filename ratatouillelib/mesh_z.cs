@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yarhl.IO;
-using ratatouillelib.common
+using ratatouillelib.common;
 
 namespace ratatouillelib
 {
@@ -13,18 +13,21 @@ namespace ratatouillelib
         private Header header;
         private float[][] vertices;
         private int[][] triangles;
-
+        public void mesh_Z() { }
         public float[][] getVerts() { return vertices; }
         public int[][] getTriangles() {  return triangles; }
         public Header getHeader() { return header; }
-    }
-    class ReadMesh_Z
-    {
-        public Mesh_Z readMesh_Z(DataReader reader)
+
+        public void setVerts(float[][] vertices) { this.vertices = vertices; }
+        public void setTriangles(int[][] triangles) {  this.triangles = triangles; }
+        public void setHeader(Header header) {  this.header = header; }
+        public void readMesh_Z(DataReader reader)
         {
-            Mesh_Z mesh = new Mesh_Z();
-            return mesh;
+            this.header = new Header();
+            header.readHeader(reader);
+
         }
     }
+
     
 }

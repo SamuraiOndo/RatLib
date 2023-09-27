@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using Yarhl.IO;
+using ratatouillelib;
 
 namespace ratatouillelib
 {
@@ -19,10 +20,12 @@ namespace ratatouillelib
                 var reader = new DataReader(stream)
                 {
                     DefaultEncoding = Encoding.GetEncoding("utf-8"),
-                    Endianness = EndiannessMode.BigEndian,
+                    Endianness = EndiannessMode.LittleEndian,
                 };
                 if (type.ToLower().Equals("mesh_z")){
-                    Debug.WriteLine("This is a Mesh_Z");
+                    Mesh_Z mesh_z = new Mesh_Z();
+                    mesh_z.readMesh_Z(reader);
+                    Debug.WriteLine(mesh_z.getHeader().getNameCrc32());
                 }
             }
         }
