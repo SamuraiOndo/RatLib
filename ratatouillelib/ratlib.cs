@@ -36,6 +36,12 @@ namespace ratatouillelib
                     Debug.WriteLine(bitmap_z.getHeader().getNameCrc32());
                     Debug.WriteLine(Convert.ToHexString(bitmap_z.getTexData()));
                 }
+                if (type.ToLower().Equals("sound_z"))
+                {
+                    Sound_Z sound_z = new Sound_Z();
+                    sound_z.readSound_Z(reader);
+                    Debug.WriteLine(Convert.ToHexString(sound_z.getSound()));
+                }
             }
         }
     }

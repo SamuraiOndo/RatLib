@@ -10,7 +10,7 @@ namespace ratatouillelib.formats
 {
     internal class Bitmap_Z
     {
-        Header header;
+        Header header; 
         private uint width;
         private uint height;
         private byte format;
