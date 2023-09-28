@@ -23,7 +23,7 @@ namespace ratatouillelib.formats
         public void setHeader(Header header) { this.header = header; }
         public void readMesh_Z(DataReader reader)
         {
-            header = new Header();
+            this.header = new Header();
             header.readHeader(reader);
 
         }

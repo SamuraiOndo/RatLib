@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using Yarhl.IO;
 using ratatouillelib.formats;
+using ratatouillelib.common;
 
 namespace ratatouillelib
 {
@@ -22,10 +23,18 @@ namespace ratatouillelib
                     DefaultEncoding = Encoding.GetEncoding("utf-8"),
                     Endianness = EndiannessMode.LittleEndian,
                 };
-                if (type.ToLower().Equals("mesh_z")){
+                if (type.ToLower().Equals("mesh_z"))
+                {
                     Mesh_Z mesh_z = new Mesh_Z();
                     mesh_z.readMesh_Z(reader);
                     Debug.WriteLine(mesh_z.getHeader().getNameCrc32());
+                }
+                if (type.ToLower().Equals("bitmap_z"))
+                {
+                    Bitmap_Z bitmap_z = new Bitmap_Z();
+                    bitmap_z.readBitmap_Z(reader);
+                    Debug.WriteLine(bitmap_z.getHeader().getNameCrc32());
+                    Debug.WriteLine(Convert.ToHexString(bitmap_z.getTexData()));
                 }
             }
         }
