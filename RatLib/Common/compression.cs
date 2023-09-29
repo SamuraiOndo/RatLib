@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,27 +29,30 @@ using Yarhl.IO;
                 pos += 1
                 decompressed.write_uint8(currentByte)
     return decompressed.buffer()*/
-namespace RatLib.common
+namespace RatLib.Common
 {
-    // not tested. probably incorrect
     class Compression
     {
-        public DataStream Decompress(byte[] data)
+        /// <summary>
+        /// Decompress Asobo LZR Compression, not tested as of now
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static DataStream Decompress(DataReader reader)
         {
             int WINDOW_LOG = 14;
             int WINDOW_SIZE = 1 << WINDOW_LOG;
             int WINDOW_MASK = (1 << WINDOW_LOG) - 1;
-            var reader = new DataReader(DataStreamFactory.FromArray(data, 0, data.Length));
             uint decompressedSize = reader.ReadUInt32();
             uint compressedSize = reader.ReadUInt32();
             byte[] windowBuffer = new byte[WINDOW_SIZE];
             int flagbit = 0;
+            Debug.WriteLine("Fuck");
             int pos = 0;
             int flagmask = 0;
             int lenbits = 0;
-            byte[] decompressed = new byte[decompressedSize];
-            var writer = new DataWriter(DataStreamFactory.FromArray(decompressed, 0, decompressed.Length));
-            while (writer.Stream.Position < decompressedSize)
+            var writer = new DataWriter(DataStreamFactory.FromFile("D:\\decompressed", FileOpenMode.Write));
+            while (writer.Stream.AbsolutePosition != decompressedSize)
             {
                 if (flagbit <= 1)
                 {
@@ -56,36 +60,40 @@ namespace RatLib.common
                     flagmask |= reader.ReadByte() << 16;
                     flagmask |= reader.ReadByte() << 8;
                     flagmask |= reader.ReadByte();
+                    Debug.WriteLine("Fuck2");
                     flagbit = 32 - 1;
                     lenbits = WINDOW_LOG - (flagmask & 3);
                 }
-
-            }
-            int flag = flagmask >> flagbit & 1;
-            flagbit -= 1;
-            uint currentByte = reader.ReadByte();
-            if (flag == 0)
-            {
-                windowBuffer[pos & WINDOW_MASK] = (byte)currentByte;
-                pos += 1;
-                writer.Write(currentByte);
-            }
-            else
-            {
-                uint d = reader.ReadByte();
-                uint j = (currentByte << 8) + d;
-
-                uint length = (j >> lenbits) + 3;
-                d = (uint)((j & (1 << lenbits) - 1) + 1);
-
-                for (j = 0; j < length; j++)
+                int flag = flagmask >> flagbit & 1;
+                flagbit -= 1;
+                uint currentByte = reader.ReadByte();
+                if (flag == 0)
                 {
-                    currentByte = windowBuffer[pos - d & WINDOW_MASK];
                     windowBuffer[pos & WINDOW_MASK] = (byte)currentByte;
                     pos += 1;
                     writer.Write(currentByte);
+                    Debug.WriteLine("Fuck3");
                 }
+                else
+                {
+                    uint d = reader.ReadByte();
+                    uint j = (currentByte << 8) + d;
+
+                    uint length = (j >> lenbits) + 3;
+                    d = (uint)((j & (1 << lenbits) - 1) + 1);
+
+                    for (j = 0; j < length; j++)
+                    {
+                        currentByte = windowBuffer[pos - d & WINDOW_MASK];
+                        windowBuffer[pos & WINDOW_MASK] = (byte)currentByte;
+                        pos += 1;
+                        writer.Write(currentByte);
+                        Debug.WriteLine("Fuck4");
+                    }
+                }
+
             }
+
             return writer.Stream;
         }
     }

@@ -42,6 +42,11 @@ namespace RatLib
                     sound_z.ReadSoundZ(reader);
                     Debug.WriteLine(Convert.ToHexString(sound_z.GetSound()));
                 }
+                if (type.ToLower().Equals("decompress"))
+                {
+                    Debug.WriteLine("Decompression.");
+                    Compression.Decompress(reader);
+                }
             }
         }
     }
