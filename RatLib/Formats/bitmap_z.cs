@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yarhl.IO;
-using ratatouillelib.common;
+using RatLib.Common;
 
-namespace ratatouillelib.formats
+namespace RatLib.Formats
 {
-    internal class Bitmap_Z
+    internal class BitmapZ
     {
         Header header; 
         private uint width;
@@ -19,10 +19,10 @@ namespace ratatouillelib.formats
         private byte mipCount;
         private ushort flag;
         private byte[] texData;
-        public void readBitmap_Z(DataReader reader)
+        public void ReadBitmapZ(DataReader reader)
         {
             this.header = new Header();
-            this.header.readHeader(reader);
+            this.header.ReadHeader(reader);
             this.width = reader.ReadUInt32();
             this.height = reader.ReadUInt32();
             uint precalculatedSize = reader.ReadUInt32();
@@ -46,11 +46,11 @@ namespace ratatouillelib.formats
                 this.texData = reader.ReadBytes((int)width * (int)height * 3);
             };
         }
-        public byte[] getTexData()
+        public byte[] GetTexData()
         {
             return this.texData;
         }
-        public Header getHeader() 
+        public Header GetHeader() 
         { 
             return this.header;
         }

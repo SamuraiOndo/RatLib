@@ -28,11 +28,12 @@ using Yarhl.IO;
                 pos += 1
                 decompressed.write_uint8(currentByte)
     return decompressed.buffer()*/
-namespace ratatouillelib.common
+namespace RatLib.common
 {
+    // not tested. probably incorrect
     class Compression
     {
-        public DataStream decompress(byte[] data)
+        public DataStream Decompress(byte[] data)
         {
             int WINDOW_LOG = 14;
             int WINDOW_SIZE = 1 << WINDOW_LOG;

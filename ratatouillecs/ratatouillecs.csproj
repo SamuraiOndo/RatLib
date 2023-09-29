@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ratatouillelib\ratatouillelib.csproj" />
+    <ProjectReference Include="..\RatLib\RatLib.csproj" />
   </ItemGroup>
 
 </Project>

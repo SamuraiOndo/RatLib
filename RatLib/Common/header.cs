@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Yarhl.IO;
 
-namespace ratatouillelib.common
+namespace RatLib.Common
 {
     public class Header
     {
-        private uint nameCrc32;
-        private uint classCrc32;
-        private byte[] linkData;
+        public uint nameCrc32;
+        public uint classCrc32;
+        public byte[] linkData;
         public Header() { }
-        public void readHeader(DataReader reader)
+        public void ReadHeader(DataReader reader)
         {
             uint dataSize = reader.ReadUInt32();
             uint linkSize = reader.ReadUInt32();
@@ -23,8 +23,8 @@ namespace ratatouillelib.common
             this.nameCrc32 = reader.ReadUInt32();
             this.linkData = reader.ReadBytes(Convert.ToInt32(linkSize));
         }
-        public uint getNameCrc32() {  return this.nameCrc32; }
-        public uint getClassCrc32() { return this.classCrc32; }
-        public byte[] getLinkData() {  return this.linkData; }
+        public uint GetNameCrc32() {  return this.nameCrc32; }
+        public uint GetClassCrc32() { return this.classCrc32; }
+        public byte[] GetLinkData() {  return this.linkData; }
     }
 }

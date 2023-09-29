@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using Yarhl.IO;
-using ratatouillelib.formats;
-using ratatouillelib.common;
+using RatLib.Formats;
+using RatLib.Common;
 
-namespace ratatouillelib
+namespace RatLib
 {
     public class ratlib
     {
@@ -25,22 +25,22 @@ namespace ratatouillelib
                 };
                 if (type.ToLower().Equals("mesh_z"))
                 {
-                    Mesh_Z mesh_z = new Mesh_Z();
-                    mesh_z.readMesh_Z(reader);
-                    Debug.WriteLine(mesh_z.getHeader().getNameCrc32());
+                    MeshZ mesh_z = new MeshZ();
+                    mesh_z.ReadMeshZ(reader);
+                    Debug.WriteLine(mesh_z.header.GetNameCrc32());
                 }
                 if (type.ToLower().Equals("bitmap_z"))
                 {
-                    Bitmap_Z bitmap_z = new Bitmap_Z();
-                    bitmap_z.readBitmap_Z(reader);
-                    Debug.WriteLine(bitmap_z.getHeader().getNameCrc32());
-                    Debug.WriteLine(Convert.ToHexString(bitmap_z.getTexData()));
+                    BitmapZ bitmap_z = new BitmapZ();
+                    bitmap_z.ReadBitmapZ(reader);
+                    Debug.WriteLine(bitmap_z.GetHeader().GetNameCrc32());
+                    Debug.WriteLine(Convert.ToHexString(bitmap_z.GetTexData()));
                 }
                 if (type.ToLower().Equals("sound_z"))
                 {
-                    Sound_Z sound_z = new Sound_Z();
-                    sound_z.readSound_Z(reader);
-                    Debug.WriteLine(Convert.ToHexString(sound_z.getSound()));
+                    SoundZ sound_z = new SoundZ();
+                    sound_z.ReadSoundZ(reader);
+                    Debug.WriteLine(Convert.ToHexString(sound_z.GetSound()));
                 }
             }
         }
