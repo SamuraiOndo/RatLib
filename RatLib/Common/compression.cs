@@ -6,49 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yarhl.IO;
-/*def decompress(data):
-    WINDOW_LOG = 14
-    WINDOW_SIZE = 1 << WINDOW_LOG
-    WINDOW_MASK = (1 << WINDOW_LOG) - 1
-
-    bs = BinaryReader(data)
-    bs.set_endian(False)
-    decompressedSize = bs.read_uint32()
-    compressedSize = bs.read_uint32()
-    windowBuffer = bytearray(WINDOW_SIZE)
-    decompressed = BinaryReader()
-    flagbit = 0
-    pos = 0
-    while decompressed.size() != decompressedSize:
-        if flagbit <= 1:
-            flagmask = bs.read_uint8() << 24
-            flagmask |= bs.read_uint8() << 16
-            flagmask |= bs.read_uint8() << 8
-            flagmask |= bs.read_uint8()
-            flagbit = 32 - 1
-            lenbits = WINDOW_LOG - (flagmask & 3)
-
-        flag = flagmask >> flagbit & 1
-        flagbit -= 1
-        currentByte = bs.read_uint8()
-
-        if flag == 0:
-            windowBuffer[pos & WINDOW_MASK] = currentByte
-            pos += 1
-            decompressed.write_uint8(currentByte)
-        else:
-            d = bs.read_uint8()
-            j = (currentByte << 8) + d
-
-            length = (j >> lenbits) + 3
-            d = (j & (1 << lenbits) - 1) + 1
-
-            for j in range(length):
-                currentByte = windowBuffer[pos - d & WINDOW_MASK]
-                windowBuffer[pos & WINDOW_MASK] = currentByte
-                pos += 1
-                decompressed.write_uint8(currentByte)
-    return decompressed.buffer()*/
 namespace RatLib.Common
 {
     class Compression
