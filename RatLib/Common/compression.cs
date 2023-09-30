@@ -54,7 +54,7 @@ namespace RatLib.Common
     class Compression
     {
         /// <summary>
-        /// Decompress Asobo LZR Compression, not tested as of now
+        /// Decompress Asobo LZR Compression
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -116,7 +116,7 @@ namespace RatLib.Common
                 }
 
             }
-
+            writer.Write(currentByte);
             return writer.Stream;
         }
     }
