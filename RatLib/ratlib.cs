@@ -12,7 +12,7 @@ using RatLib.Common;
 
 namespace RatLib
 {
-    public class ratlib
+    public class RatLib
     {
         public static void ReadFile(string path, string type)
         {
