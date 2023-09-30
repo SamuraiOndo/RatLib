@@ -57,7 +57,7 @@ namespace RatLib.Common
         /// Decompress Asobo LZR Compression
         /// </summary>
         /// <param name="data"></param>
-        /// <returns></returns>
+        /// <returns>Returns a DataStream object</returns>
         public static DataStream Decompress(DataReader reader)
         {
             int WINDOW_LOG = 14;
