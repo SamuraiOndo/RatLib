@@ -14,9 +14,10 @@ namespace RatLib.Formats
         public float[][] vertices;
         public int[][] triangles;
         public void mesh_Z() { }
-        public void ReadMeshZ(DataReader reader)
+        public void ReadMeshZ(string path)
         {
-            this.header = new Header();
+            var reader = new DataReader(DataStreamFactory.FromFile(path, FileOpenMode.Read));
+            header = new Header();
             header.ReadHeader(reader);
 
         }

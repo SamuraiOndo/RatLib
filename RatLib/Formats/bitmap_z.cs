@@ -8,51 +8,46 @@ using RatLib.Common;
 
 namespace RatLib.Formats
 {
-    internal class BitmapZ
+    public class BitmapZ
     {
-        Header header; 
-        private uint width;
-        private uint height;
-        private byte format;
-        private byte paletteFormat;
-        private byte transpFormat;
-        private byte mipCount;
-        private ushort flag;
-        private byte[] texData;
-        public void ReadBitmapZ(DataReader reader)
+        Header header;
+        public uint width;    
+        public uint height;   
+        public byte format;   
+        public byte paletteFormat;
+        public byte transpFormat;
+        public byte mipCount;
+        public ushort flag;
+        public bool isDDS = false;
+        public byte[] texData;
+        public void ReadBitmapZ(string path)
         {
-            this.header = new Header();
-            this.header.ReadHeader(reader);
-            this.width = reader.ReadUInt32();
-            this.height = reader.ReadUInt32();
+            var reader = new DataReader(DataStreamFactory.FromFile(path, FileOpenMode.Read));
+            header = new Header();
+            header.ReadHeader(reader);
+            width = reader.ReadUInt32();
+            height = reader.ReadUInt32();
             uint precalculatedSize = reader.ReadUInt32();
-            this.format = reader.ReadByte();
+            format = reader.ReadByte();
             reader.ReadByte();
-            this.paletteFormat = reader.ReadByte();
-            this.transpFormat = reader.ReadByte();
-            this.mipCount = reader.ReadByte();
+            paletteFormat = reader.ReadByte();
+            transpFormat = reader.ReadByte();
+            mipCount = reader.ReadByte();
             reader.ReadByte();
-            this.flag = reader.ReadUInt16();
+            flag = reader.ReadUInt16();
             if (precalculatedSize != 0)
             {
-                this.texData = reader.ReadBytes((int)precalculatedSize);
+                isDDS = true;
+                texData = reader.ReadBytes((int)precalculatedSize);
             }
             else if (format == 12)
             {
-                this.texData = reader.ReadBytes((int)width * (int)height * 4);
+                texData = reader.ReadBytes((int)width * (int)height * 4);
             }
             else
             {
-                this.texData = reader.ReadBytes((int)width * (int)height * 3);
+                texData = reader.ReadBytes((int)width * (int)height * 3);
             };
-        }
-        public byte[] GetTexData()
-        {
-            return this.texData;
-        }
-        public Header GetHeader() 
-        { 
-            return this.header;
         }
     }
 }
